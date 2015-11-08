@@ -15,6 +15,13 @@ var App = React.createClass({
     };
   },
 
+  addToOrder: function(key) {
+    this.state.order[key] = this.state.order[key] + 1 || 1
+    this.setState({
+      order: this.state.order
+    });
+  },
+
   addFish: function(fish) {
     var timestamp = (new Date()).getTime();
 
@@ -33,7 +40,7 @@ var App = React.createClass({
 
   renderFishes: function() {
     return Object.keys(this.state.fishes).map(function(key) {
-      return <Fish key={key} index={key} details={this.state.fishes[key]} />
+      return <Fish key={key} index={key} details={this.state.fishes[key]} addToOrder={this.addToOrder}/>
     }.bind(this));
   },
 
