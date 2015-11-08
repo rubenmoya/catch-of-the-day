@@ -9,6 +9,7 @@ var Inventory = React.createClass({
       <div>
         <h2>Inventory</h2>
         <AddFishForm {...this.props}/>
+        <button onClick={this.props.loadSamples}>Load sample fishes</button>
       </div>
     );
   }

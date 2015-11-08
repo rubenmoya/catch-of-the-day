@@ -24,6 +24,12 @@ var App = React.createClass({
     });
   },
 
+  loadSamples: function() {
+    this.setState({
+      fishes: require('./sample-fishes.js')
+    });
+  },
+
   render: function() {
     return (
       <div className="catch-of-the-day">
@@ -31,7 +37,7 @@ var App = React.createClass({
           <Header tag="Fresh Seafood Market"/>
         </div>
         <Order />
-        <Inventory addFish={this.addFish} />
+        <Inventory addFish={this.addFish} loadSamples={this.loadSamples}/>
       </div>
     );
   }
