@@ -6,6 +6,10 @@ var Order = require('./order');
 var Inventory = require('./inventory');
 var Fish = require('./fish');
 
+var Rebase = require('re-base');
+var base = Rebase.createClass('https://catch-of-the-day-rm.firebaseio.com/');
+
+
 var App = React.createClass({
 
   getInitialState: function() {
@@ -13,6 +17,13 @@ var App = React.createClass({
       fishes: {},
       order: {}
     };
+  },
+
+  componentDidMount: function() {
+    base.syncState(this.props.params.storeId + '/fishes', {
+      context: this,
+      state: 'fishes'
+    });
   },
 
   addToOrder: function(key) {
