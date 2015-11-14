@@ -9,8 +9,11 @@ var Fish = require('./fish');
 var Rebase = require('re-base');
 var base = Rebase.createClass('https://catch-of-the-day-rm.firebaseio.com/');
 
+var Catalyst = require('react-catalyst');
 
 var App = React.createClass({
+
+  mixins: [Catalyst.LinkedStateMixin],
 
   getInitialState: function() {
     return {
@@ -77,7 +80,7 @@ var App = React.createClass({
           </ul>
         </div>
         <Order fishes={this.state.fishes} order={this.state.order} />
-        <Inventory addFish={this.addFish} loadSamples={this.loadSamples}/>
+        <Inventory linkState={this.linkState} fishes={this.state.fishes} addFish={this.addFish} loadSamples={this.loadSamples}/>
       </div>
     );
   }
