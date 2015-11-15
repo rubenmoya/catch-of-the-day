@@ -7,9 +7,10 @@ var Order = React.createClass({
   renderOrder: function(key) {
     var fish = this.props.fishes[key];
     var count = this.props.order[key];
+    var removeButton = <button onClick={this.props.removeFromOrder.bind(null, key)}>&times;</button>;
 
     if(!fish) {
-      return <li key={key}>Sorry, fish no longer available!</li>
+      return <li key={key}>Sorry, fish no longer available! {removeButton}</li>
     }
 
     return (
@@ -17,6 +18,7 @@ var Order = React.createClass({
         <span>{count}</span>lbs
         {fish.name}
         <span className="price">{H.formatPrice(count * fish.price)}</span>
+        {removeButton}
       </li>
     );
   },

@@ -48,6 +48,13 @@ var App = React.createClass({
     });
   },
 
+  removeFromOrder: function(key) {
+    delete this.state.order[key];
+    this.setState({
+      order: this.state.order
+    });
+  },
+
   addFish: function(fish) {
     var timestamp = (new Date()).getTime();
 
@@ -56,6 +63,16 @@ var App = React.createClass({
     this.setState({
       fishes: this.state.fishes
     });
+  },
+
+  removeFish: function(key) {
+    if(confirm("Are you sure you want to remove this fish?!")) {
+
+      this.state.fishes[key] = null;
+      this.setState({
+        fishes: this.state.fishes
+      });
+    }
   },
 
   loadSamples: function() {
@@ -79,8 +96,8 @@ var App = React.createClass({
             {this.renderFishes()}
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order} />
-        <Inventory linkState={this.linkState} fishes={this.state.fishes} addFish={this.addFish} loadSamples={this.loadSamples}/>
+        <Order removeFromOrder={this.removeFromOrder} fishes={this.state.fishes} order={this.state.order} />
+        <Inventory removeFish={this.removeFish} linkState={this.linkState} fishes={this.state.fishes} addFish={this.addFish} loadSamples={this.loadSamples}/>
       </div>
     );
   }
